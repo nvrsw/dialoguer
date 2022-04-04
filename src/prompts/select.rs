@@ -265,6 +265,7 @@ impl Select<'_> {
             if let Some(ref prompt) = self.prompt {
                 paging.render_prompt(|paging_info| render.select_prompt(prompt, paging_info))?;
             }
+            paging.update(self.default)?;
 
             for (idx, item) in self
                 .items
