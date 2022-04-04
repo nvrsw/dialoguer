@@ -244,6 +244,7 @@ impl Select<'_> {
         }
 
         let mut paging = Paging::new(term, self.items.len(), self.max_length);
+        paging.update_cursor_pos(self.default);
         let mut render = TermThemeRenderer::new(term, self.theme);
         let mut sel = self.default;
 
@@ -265,7 +266,6 @@ impl Select<'_> {
             if let Some(ref prompt) = self.prompt {
                 paging.render_prompt(|paging_info| render.select_prompt(prompt, paging_info))?;
             }
-            paging.update(self.default)?;
 
             for (idx, item) in self
                 .items
